@@ -7,6 +7,11 @@ import { DropdownModule } from '@coreui/angular';
 import { NavModule, TabsModule } from '@coreui/angular';
 
 import { ButtonModule } from '@coreui/angular';
+import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
+
+import { FormsModule } from '@angular/forms';
+
+
 
 @NgModule({
   declarations: [
@@ -18,7 +23,9 @@ import { ButtonModule } from '@coreui/angular';
     NavModule,
     TabsModule,
     DropdownModule,
-    ButtonModule 
+    ButtonModule ,
+    MonacoEditorModule.forRoot(),
+    FormsModule
   ],
   providers: [],
   bootstrap: [AppComponent]

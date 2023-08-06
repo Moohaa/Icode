@@ -21,6 +21,8 @@
     "@coreui/angular": "^4.5.11",
     "@coreui/coreui": "^4.3.0",
     "@coreui/icons-angular": "^4.5.11",
+    "monaco-editor": "^0.24.0",
+    "ngx-monaco-editor": "^12.0.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",
     "zone.js": "~0.13.0"

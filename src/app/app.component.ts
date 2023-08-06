@@ -7,4 +7,11 @@ import { Component } from '@angular/core';
 })
 export class AppComponent {
   title = 'Icode';
+
+  editorOptions = {theme: 'vs-light', language: 'javascript'};
+  code: string= 'function x() {\nconsole.log("Hello world!");\n}';
+  model= {
+    code: 'heLLo world!',
+    language: 'text/plain'
+  };
 }
