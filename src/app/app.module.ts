@@ -10,7 +10,7 @@ import { ButtonModule } from '@coreui/angular';
 import { MonacoEditorModule, NgxMonacoEditorConfig } from 'ngx-monaco-editor';
 
 import { FormsModule } from '@angular/forms';
-
+import { SpinnerModule } from '@coreui/angular';
 
 
 @NgModule({
@@ -25,7 +25,8 @@ import { FormsModule } from '@angular/forms';
     DropdownModule,
     ButtonModule ,
     MonacoEditorModule.forRoot(),
-    FormsModule
+    FormsModule,
+    SpinnerModule
   ],
   providers: [],
   bootstrap: [AppComponent]
