@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ApiServiceService } from './shared/services/api-service.service';
 
 @Component({
   selector: 'app-root',
@@ -9,19 +10,24 @@ export class AppComponent implements OnInit {
   title = 'Icode';
 
   editorOptions = { theme: 'vs-light', language: 'javascript' };
-  code: string = 'function x() {\nconsole.log("Hello world!");\n}';
+  code: string = '\nfunction x() {console.log(\"Hello world!");}\n\n\n\n\nfor(let i=0;i<99;i++) x();';
 
   editor: any;
   desiredNumberOfLines = 40;
   isLoading = false;
   activePane = 0;
+  output:string[]=[];
+
+  status="";
 
   model = {
     code: 'heLLo world!',
     language: 'text/plain',
   };
+
+  constructor(private apiService:ApiServiceService){}
   ngOnInit(): void {
-    this.setNumberOfLines();
+    //this.setNumberOfLines();
   }
   onInit(editor: any) {
     this.editor = editor;
@@ -29,10 +35,20 @@ export class AppComponent implements OnInit {
   run() {
     this.isLoading = true;
 
-    setTimeout(() => {
+    this.apiService.execCode("js",this.code).subscribe((data)=>{
+      this.output=data.output.split("\n");
+      this.output.map((line:string)=> {return line.replace(/\n/g,'')});
+      console.log(this.output);
+      console.log(this.output[this.output.length-2]);
+      if(this.output[this.output.length-2]=="finish") this.status="Success";
+      else if(this.output[this.output.length-2]!="error") this.status="Error";
+      else{
+        this.status="Time limit exceeded";
+      }
+
       this.isLoading = false;
       this.activePane = 1;
-    }, 20000);
+    })
   }
   setNumberOfLines() {
     for (let i = 0; i < this.desiredNumberOfLines; i++) {

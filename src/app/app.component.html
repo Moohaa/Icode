@@ -24,11 +24,16 @@
   <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink
     >Output</a
   >
-  <div style="position: absolute; right: 0">
-    <button cButton class="m-1"  color="secondary" (click)="run()">
-      <c-spinner *ngIf="isLoading" aria-hidden="true" size="sm" variant="grow"></c-spinner>
-      Run
-    </button>
+  <div style="position: absolute; right: 0;margin-left:5px;">
+    <div style="display: flex; flex-direction: row;align-items: center;">
+      
+      <button cButton class="m-1"  color="secondary" (click)="run()" style="width: 100px;">
+        <c-spinner *ngIf="isLoading" aria-hidden="true" size="sm" variant="grow"></c-spinner>
+        Run
+      </button>
+
+    </div>
+    
   </div>
 </c-nav>
   <c-tab-content [activeTabPaneIdx]="activePane"  (activeTabPaneIdxChange)="onTabChange($event)" #tabContent="cTabContent" style="height: 100%; width: 100%">
@@ -44,18 +49,12 @@
     <div style="height: 100%;width: 100%;">
 
       <p>
-        >> output : 55<br>
-        >> ["test","tesgdfgr","etsdf"]<br>
-        >> ["test","tesgdfgr","etsdf"]<br>
-        >> ["test","tesgdfgr","etsdf"]<br>
-        >> ["test","tesgdfgr","etsdf"]<br>
-        >> ["test","tesgdfgr","etsdf"]<br>
-        >> ["test","tesgdfgr","etsdf"]<br>
-        >> ["test","tesgdfgr","etsdf"]<br>
-        >> ["test","tesgdfgr","etsdf"]<br>
-        >> ["test","tesgdfgr","etsdf"]<br>
-        >> ["test","tesgdfgr","etsdf"]<br>
-
+      <span *ngIf="status=='Success'" style="color: green;">>> Status : {{status}} </span>
+      <span *ngIf="status=='Error'" style="color:red;">>> Status : {{status}} </span>
+      <span *ngIf="status=='Time limit exceeded'" style="color: blue;">>> Status : {{status}} </span>
+      <br>
+       <span *ngFor="let line of output">
+        ____>> {{line}} <br></span>
       </p>
 
 
