@@ -1,42 +1,85 @@
-<c-nav variant="tabs" style="position: relative">
-  <div>
-    <c-dropdown>
-      <button cButton cDropdownToggle style="margin: 3px" color="primary">
-        Js
-      </button>
-      <ul cDropdownMenu>
-        <li><a [routerLink]="[]" cDropdownItem>Python</a></li>
-        <li>
-          <a [routerLink]="[]" cDropdownItem class="selected">JavaScript</a>
-        </li>
-        <li><a [routerLink]="[]" cDropdownItem>Java</a></li>
-      </ul>
-    </c-dropdown>
-  </div>
-  <a
-    [active]="true"
-    [cTabContent]="tabContent"
-    [routerLink]
-    [tabPaneIdx]="0"
-    cNavLink
-    >Main.js</a
-  >
-  <a [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink
-    >Output</a
-  >
-  <div style="position: absolute; right: 0;margin-left:5px;">
-    <div style="display: flex; flex-direction: row;align-items: center;">
-      
-      <button cButton class="m-1"  color="secondary" (click)="run()" style="width: 100px;">
-        <c-spinner *ngIf="isLoading" aria-hidden="true" size="sm" variant="grow"></c-spinner>
-        Run
-      </button>
-
+<c-nav
+  variant="tabs"
+  style="display:flex;justify-content: space-between;flex-direction: row; background-color: antiquewhite"
+>
+  <div style="display:flex;flex-direction: row;">
+    <div>
+      <c-dropdown alignment="start" style="margin:5px;">
+        <button cButton cDropdownToggle color="secondary">
+          <span style="margin: 5px;">{{ lang }}</span>
+        </button>
+        <div cDropdownMenu>
+          <button
+            cDropdownItem
+            [ngClass]="{ selected: lang == 'js' }"
+            (click)="changeLanguage('js')"
+          >
+            Js
+          </button>
+          <button
+            cDropdownItem
+            [ngClass]="{ selected: lang == 'py' }"
+            (click)="changeLanguage('py')"
+          >
+            Py
+          </button>
+          <button
+            cDropdownItem
+            [ngClass]="{ selected: lang == 'java' }"
+            (click)="changeLanguage('java')"
+          >
+            Java
+          </button>
+          <button
+            cDropdownItem
+            [ngClass]="{ selected: lang == 'cpp' }"
+            (click)="changeLanguage('cpp')"
+          >
+            C++
+          </button>
+        </div>
+      </c-dropdown>
     </div>
-    
+    <a
+      [ngStyle]="{'background-color': activePane==0 ? '#1d1d1d':'transparent','color': activePane==0 ? 'white':'red'} "
+      [active]="true"
+      [cTabContent]="tabContent"
+      [routerLink]
+      [tabPaneIdx]="0"
+      cNavLink
+      >Main.{{ lang }}</a
+    >
+
+    <a
+    [ngStyle]="{'background-color': activePane==1 ? '#1d1d1d':'transparent','color': activePane==1 ? 'white':'red'} " [cTabContent]="tabContent" [routerLink] [tabPaneIdx]="1" cNavLink
+      >Output</a
+    >
+  </div>
+
+  <div >
+    <button
+      cButton
+      class="m-1"
+      color="primary"
+      (click)="run()"
+      style="width: 100px"
+    >
+      <c-spinner
+        *ngIf="isLoading"
+        aria-hidden="true"
+        size="sm"
+        variant="grow"
+      ></c-spinner>
+      Run
+    </button>
   </div>
 </c-nav>
-  <c-tab-content [activeTabPaneIdx]="activePane"  (activeTabPaneIdxChange)="onTabChange($event)" #tabContent="cTabContent" style="height: 100%; width: 100%">
+<c-tab-content
+  [activeTabPaneIdx]="activePane"
+  (activeTabPaneIdxChange)="onTabChange($event)"
+  #tabContent="cTabContent"
+  style="height: 100%; width: 100%"
+>
   <c-tab-pane style="height: 100%; width: 100%">
     <ngx-monaco-editor
       style="min-height: 800px"
@@ -46,19 +89,20 @@
     ></ngx-monaco-editor>
   </c-tab-pane>
   <c-tab-pane class="p-3">
-    <div style="height: 100%;width: 100%;">
-
+    <div style="height: 100%; width: 100%">
       <p>
-      <span *ngIf="status=='Success'" style="color: green;">>> Status : {{status}} </span>
-      <span *ngIf="status=='Error'" style="color:red;">>> Status : {{status}} </span>
-      <span *ngIf="status=='Time limit exceeded'" style="color: blue;">>> Status : {{status}} </span>
-      <br>
-       <span *ngFor="let line of output">
-        ____>> {{line}} <br></span>
+        <span *ngIf="status == 'Success'" style="color: green"
+          >>> Status : {{ status }}
+        </span>
+        <span *ngIf="status == 'Error'" style="color: red"
+          >>> Status : {{ status }}
+        </span>
+        <span *ngIf="status == 'Time limit exceeded'" style="color: wheat"
+          >>> Status : {{ status }}
+        </span>
+        <br />
+        <span *ngFor="let line of output"> ____>> {{ line }} <br /></span>
       </p>
-
-
     </div>
   </c-tab-pane>
-  
 </c-tab-content>
