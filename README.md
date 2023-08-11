@@ -1,6 +1,6 @@
 # Icode
 
-![alt text](Icode_demo.gif)
+![alt text](Icode_Demo.gif)
 
 Icode is an online code editor that allows users to effortlessly write and submit their code for execution, eliminating the requirement to set up the local environment for each programming language.
 Currently the editor support two languages JavaScript and Python.
