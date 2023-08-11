@@ -40,11 +40,11 @@ export class AppComponent implements OnInit {
     this.apiService.execCode(this.lang,this.code).subscribe((data)=>{
       this.output=data.output.split("\n");
       this.output.map((line:string)=> {return line.replace(/\n/g,'')});
-      if(this.output[this.output.length-2]=="finish") this.status="Success";
-      else if(this.output[this.output.length-2]!="error") this.status="Error";
-      else{
-        this.status="Time limit exceeded";
-      }
+
+      if(this.output[0]=="")  this.status="Time limit exceeded";
+      else if(this.output[this.output.length-2]=="finish") this.status="Success";
+      else this.status="Error";
+      
 
       this.output=this.output.slice(0,-2);
       this.isLoading = false;
